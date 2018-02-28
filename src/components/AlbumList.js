@@ -1,5 +1,6 @@
 import React from 'react';
-import {Text, StyleSheet, View} from 'react-native';
+import {Text, StyleSheet, View, ScrollView} from 'react-native';
+import AlbumDetail from './AlbumDetail';
 
 export default class AlbumList extends React.Component {
   state = {albums: []};
@@ -10,11 +11,15 @@ export default class AlbumList extends React.Component {
       .then((response) => this.setState({albums: response}))
   }
 
+  renderAlbums() {
+    return this.state.albums.map((album, index) => <AlbumDetail key={index} album={album}/>)
+  }
+
   render() {
     return (
-      <View>
-        <Text>Album list!!!</Text>
-      </View>
+      <ScrollView>
+        {this.renderAlbums()}
+      </ScrollView>
     )
   }
 }
